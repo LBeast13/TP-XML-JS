@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Compte-rendu TPXML B3XX</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<style>
+		body {
+			font-family: Tahoma, Geneva, sans-serif;
+			max-width: 700px;
+			margin: 0 auto;
+			padding: 10px;
+		}
+		
+		h1, h2 {
+			text-align: center;
+		}
+		
+		pre {
+			background-color: black;
+			color: white;
+			padding: 10px;
+			overflow: auto;
+			font-family: "Lucida Console", Monaco, monospace;
+			border-left: 10px solid orange;
+			font-size: 14px;
+		}
+		code {
+			background-color: black;
+			color: white;
+		}
+		
+		.question {
+			color:#7a7a7a;
+			font-weight: bold;
+			padding-left: 7px;
+			margin-left: 20px;
+			border-left: 3px solid #7a7a7a;
+			
+		}
+		
+		</style>
+	</head>
+	<body>
+		<h1>Compte-rendu TPXML B3XX</h1>
+		<h1>BETTE Liam (04009791), BOSIO Alexis (4009831), REMY Thibault (04017227)</h1>
+		<h2>Première partie</h2>
+		<h3>&Eacute;tape 1</h3>
+		<h4>Q1</h4>
+		<p class = "question">
+			Toutes les capitales
+			<pre>//capital</pre>
+		</p>
+		<h4>Q2</h4>
+		<p class = "question">
+			Noms officiels des pays
+			<pre>//name/official</pre>
+		</p>
+		<h4>Q3</h4>
+		<p class = "question">
+			Superficie de chaque pays
+			<pre>//country/@area</pre>
+		</p>
+		<h4>Q4</h4>
+		<p class = "question">
+			Eléments ayant exactement un attribut
+			<pre>//*[count(@*)=1]</pre>
+		</p>
+		<h4>Q5</h4>
+		<p class = "question">
+			Les noms officiels des pays exprimés français, pour ceux qui en ont
+			<pre>//native_name[@lang="fra"]/official</pre>
+		</p>
+		<h4>Q6</h4>
+		<p class = "question">
+			Les deuxièmes noms natifs officiels des pays
+			<pre>//native_name[2]/official</pre>
+		</p>
+		<h4>Q7</h4>
+		<p class = "question">
+			La somme des superficies (area) des pays d'Europe
+			<pre>sum//(@area[../infosContinent/continent="Europe"])</pre>
+		</p>
+		<h4>Q8</h4>
+		<p class = "question">
+			Les pays qui n'ont pas de nom natif
+			<pre>//country[count(./name/native_name)=0]</pre>
+		</p>
+		<h4>Q9</h4>
+		<p class = "question">
+			Les pays dont la superficie est inférieure à 100 km²
+			<pre>//country[@area<100]</pre>
+		</p>
+		<h4>Q10</h4>
+		<p class = "question">
+			Les noms officiels des pays ayant plus de 7 voisins
+			<pre>//country/name/official[count(../../borders/neighbour)>7]</pre>
+		</p>
+		<h4>Q11</h4>
+		<p class = "question">
+			La position de la France dans le document XML
+			<pre>count(//country[name/common="France"]/preceding_sibling::*)+1</pre>
+		</p>
+		<h4>Q12</h4>
+		<p class = "question">
+			Les noms officiels des royaumes
+			<pre>//country/name/official[contains(.,"Kingdom")]</pre>
+		</p>
+		<h4>Q13</h4>
+		<p class = "question">
+			Les langues des noms natifs des pays sans doublons
+			<br /> (en 2.0)
+			<pre>distinct-values(//country/name/native_name/@lang)</pre>
+		</p>
+		<p class = "question">
+			Les langues des noms natifs des pays sans doublons
+			<pre>//country/name/native_name/@lang[not(. = preceding::name/native_name/@lang)]</pre>
+		</p>
+		<h3>&Eacute;tape 2</h3>
+		<h4>Q1</h4>
+		<p class = "question">
+			L'instance countriesTP.xml ne correspond pas tout à fait à la DTD countries.dtd. Trouvez l'élement qui est mal déclaré et corrigez sa déclaration dans la DTD. Donnez la définition corrigée.
+		
+		</p><p>
+			Dans le fichier countries.dtd ligne 8, on remplace
+			<code>tld+</code>
+			par
+			<code>tld*</code>.
+			En effet le <code>*</code> indique une balise répetée plusieurs fois même si elle est optionnelle. Cette définition impose que la balise contienne entre 0 et une infinité de fois la balise.
+	Le <code>+</code> peut être répétée plusieurs fois. Cette définition impose que la balise continne au minimum une fois la balise.
+		</p>
+		<h4>Q2</h4>
+		<p class = "question">
+			Certains élements enfants de l'élement country sont indiqués avec une occurrence minimale 0 alors qu'ils sont sont présents partout. Trouvez les et corrigez la DTD en conséquence. Donnez la définition corrigée de leurs éléments parent. 
+		</p>
+		<p>
+			Pour tous les éléments enfants de country ayant une occurence minimale de 0,
+			on effectue <code>count(//country/&lsaquo;Element&rsaquo;)</code>
+			Si le réultat est 0 alors on peut remplacer <code>&lsaquo;Element&rsaquo;*</code> par <code>&lsaquo;Element&rsaquo;+</code>
+			Seul l'élément infosRegion a un résulat de 0.
+			Dans le fichier countries.dtd ligne 8, on remplace
+			<code>infosRegion*</code>
+			par
+			<code>infosRegion+</code>.
+		</p>
+		<h3>&Eacute;tape 3</h3>
+		<p class="question">
+			Vous allez maintenant produire une feuille de style XSL qui permet la transformation de l'instance du document XML en document HTML. Cette feuille va comprendre des éléments de mise en forme HTML et des commandes XSLT permettant de gérer le contenu.
+		</p>
+			<h2>Deuxième partie</h2>
+		<p class="question">
+		    Cette partie a pour but de vous faire découvrir la technologie AJAX. Sur une page HTML des boutons permettent de déclencher des fonctions Javascript: celles-ci vont dynamiquement manipuler des documents XML, notamment la page HTML elle-même, mais aussi charger un document XML, en extraire des informations, appliquer une feuille de style XSL, etc. Les fonctions javascript sont incluses dans le code source de la page HTML ou peuvent être dans un fichier à part.
+		</p>
+		
+	</body>
+</html>

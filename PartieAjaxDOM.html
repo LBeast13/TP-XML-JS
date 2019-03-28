@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>TP 3IF Ajax</title>
+    <meta name="author" content="Liam BETTE, Alexis BOSIO, Thibault REMY">
+
+    <script type="text/javascript" src="partieJavascript.js"></script>
+
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1>TP 3IF Partie Ajax DOM</h1>
+        <h2>R&eacute;alis&eacute; par :</h2>
+        <p>Liam BETTE, Alexis BOSIO, Thibault REMY<br/>(B3XXX)</p>
+    </div>
+    <p>
+        <!-- QUESTION 1 -->
+        <p>1. Ce bouton modifie la couleur du fond en bleu et met en blanc la couleur du texte du bouton</p>
+        <input name="button1" 
+               type="button" 
+               id="buttonQ1" 
+               onClick="setBgAndButtonColor('blue','white');" 
+               value="Question 1" />
+        <hr/>
+      
+        <!-- QUESTION 2 -->
+        <p>2. Ce bouton remet la couleur du fond en blanc</p>
+        <input name="button2" 
+               type="button" 
+               id="buttonQ2" 
+               onClick="resetBgColor();" 
+               value="Question 2" />
+        <hr/>
+
+        <!-- QUESTION 3 -->
+        <p>3. Ce bouton affiche le nom officiel et la capitale du pays dont le nom est s&eacute;lectionn&eacute; dans le champ de saisie</p>
+        <input name="button3" 
+               type="button" 
+               id="buttonQ3" 
+               onClick="getNomOfficielCapitale('countriesTP.xml', 'cherchePays.xsl', document.getElementById('nomPays').value);" 
+               value="Question 3" />
+        <input name="text" 
+               type="text" 
+               id="nomPays" 
+               placeholder="Tapez le nom d'un pays" 
+               list="autocompList"/>
+        <!-- Liste d'autocomplétion -->
+        <datalist id="autocompList">
+        </datalist>
+        <div id="nomEtCapitale">
+            <p></p>
+        </div>
+        <hr/>
+
+        <!-- QUESTION 4 -->
+        <p>4. Ce bouton charge et afiche le dessin svg contenu dans le fichier : exemple.svg</p>
+        <input name="button4" 
+               type="button" 
+               id="buttonQ4" 
+               onClick="afficheImage('exemple.svg');" 
+               value="Question 4" />
+        <div>
+            <object id="imageExemple" type="image/svg+xml"></object>
+        </div>
+        <hr/>
+
+        <!-- QUESTION 5 -->
+        <p>5. Ce bouton rend les &eacute;l&eacute;ments du fichier svg "clickables" et affiche la valeur de leur attribut title quand ils sont cliqu&eacute;s</p>
+        <input name="button5" 
+               type="button" 
+               id="buttonQ5" 
+               onClick="imageClickable();" 
+               value="Question 5" />
+        <div>
+            <p>Valeur de l'attribut title de l'&eacute;l&eacute;ment cliqu&eacute; : <span id="titreElement"></span></p>
+        </div>
+        <hr/>
+
+        <!-- QUESTION 6 -->
+        <p>6. Ce bouton charge et afiche la carte du monde svg contenu dans le fichier : worldHigh.svg</p>
+        <input name="button6" 
+               type="button" 
+               id="buttonQ6" 
+               onClick="afficheImageMonde('worldHigh.svg');" 
+               value="Question 6" />
+        <div id="tabPaysSurvol">
+            <p></p>
+            <object id="imageMonde" type="image/svg+xml" width="1106px" height="800px"></object>
+        </div>
+        <hr/>
+
+        <!-- QUESTION 7 -->
+        <p>7. Ce bouton rend les pays de la carte "clickables" et affiche la valeur de leur attribut title quand ils sont cliqu&eacute;s</p>
+        <input name="button7" 
+               type="button" 
+               id="buttonQ7" 
+               onClick="imageMondeClickable();" 
+               value="Question 7" />
+        <div>
+            <p>Valeur de l'attribut title du pays cliqu&eacute; : <span id="nomPaysClick"></span></p>
+        </div>
+        <hr/>
+
+        <!-- QUESTION 8 -->
+        <p>8. Ce bouton capte l'&eacute;v&eacute;nement de passage et sorti de la souris sur les pays de la carte et change leur couleur, affiche leur nom, capitale et drapeau dans un tableau au dessus de la carte</p>
+        <input name="button8" 
+               type="button" 
+               id="buttonQ8" 
+               onClick="imageMondePassageSouris('countriesTP.xml','tableauPays.xsl');" 
+               value="Question 8" />
+        <hr/>
+
+        <!-- QUESTION 9 -->
+        <p>9. Ce bouton active la fonction d'autocomp&eacute;ltion pour la champ de saisie de la question 3.</p>
+        <input name="button9" 
+               type="button" 
+               id="buttonQ9" 
+               onClick="ajouterAutocompletion();" 
+               value="Question 9" />
+        <hr/>
+
+</body>
+
+</html>
